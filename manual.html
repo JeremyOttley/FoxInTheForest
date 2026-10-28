@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Fox in the Forest — Official 1990s Instruction Booklet</title>
+  <style>
+    :root {
+      --paper-bg: #f7f4ea;
+      --paper-alt: #f0ede1;
+      --ink-main: #181818;
+      --ink-muted: #222222;
+      --accent-navy: #1a2656;
+      --accent-crimson: #9a1b1b;
+      --accent-mustard: #d48b16;
+      --accent-forest: #1b4d2e;
+      --border-dark: #181818;
+      --win-gray: #c0c0c0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px 12px;
+      background-color: #2c2a25;
+      background-image: radial-gradient(#3b3831 1px, transparent 1px);
+      background-size: 12px 12px;
+      color: var(--ink-main);
+      font-family: "Georgia", "Times New Roman", "Verdana", serif;
+      line-height: 1.52;
+    }
+
+    /* Booklet Container with Simulated Spine & Staples */
+    .manual-booklet {
+      max-width: 980px;
+      margin: 0 auto;
+      background-color: var(--paper-bg);
+      border: 3px solid var(--border-dark);
+      box-shadow:
+        8px 8px 0px #181818,
+        inset 18px 0 24px rgba(24, 24, 24, 0.08);
+      padding: 32px 36px 40px 48px;
+      position: relative;
+      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+    }
+
+    /* Simulated Staple Marks on Left Binding Spine */
+    .manual-booklet::before,
+    .manual-booklet::after {
+      content: "";
+      position: absolute;
+      left: 10px;
+      width: 6px;
+      height: 44px;
+      background: linear-gradient(to bottom, #666, #d8d8d8 50%, #555);
+      border: 1px solid #222;
+      border-radius: 2px;
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
+    }
+
+    .manual-booklet::before {
+      top: 22%;
+    }
+
+    .manual-booklet::after {
+      bottom: 22%;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, .retro-badge, .callout-header {
+      font-family: "Impact", "Arial Black", "Copperplate", "Trebuchet MS", sans-serif;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--ink-main);
+      margin-top: 0;
+    }
+
+    code, .hud-num, .mono {
+      font-family: "Courier New", "Consolas", monospace;
+      font-weight: bold;
+    }
+
+    /* Cover Banner */
+    .cover-banner {
+      background: linear-gradient(135deg, var(--accent-forest) 0%, var(--accent-navy) 100%);
+      color: var(--paper-bg);
+      border: 3px outset var(--accent-mustard);
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      position: relative;
+      box-shadow: 4px 4px 0 var(--border-dark);
+    }
+
+    .platform-badge {
+      display: inline-block;
+      background-color: var(--accent-crimson);
+      color: var(--paper-bg);
+      border: 2px solid var(--paper-bg);
+      padding: 3px 10px;
+      font-size: 0.82rem;
+      letter-spacing: 1.2px;
+      margin-bottom: 10px;
+    }
+
+    .cover-title {
+      font-size: 2.75rem;
+      color: #f7f4ea;
+      text-shadow: 3px 3px 0 #181818;
+      margin: 4px 0 6px 0;
+      line-height: 1.05;
+    }
+
+    .cover-subtitle {
+      font-family: "Courier New", "Consolas", monospace;
+      font-size: 1rem;
+      color: #f0ede1;
+      border-top: 2px solid var(--accent-mustard);
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+
+    /* Safety Warning Box */
+    .safety-box {
+      background-color: var(--paper-alt);
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(212, 139, 22, 0.12),
+        rgba(212, 139, 22, 0.12) 10px,
+        transparent 10px,
+        transparent 20px
+      );
+      border: 3px double var(--accent-crimson);
+      padding: 14px 18px;
+      margin-bottom: 28px;
+      box-shadow: inset 2px 2px 0 #fff;
+    }
+
+    .safety-title {
+      color: var(--accent-crimson);
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Chapter Headers with Dual Stripes & Page Badges */
+    .chapter-section {
+      margin-bottom: 34px;
+      padding-top: 8px;
+    }
+
+    .chapter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--accent-navy);
+      color: var(--paper-bg);
+      padding: 8px 14px;
+      border-top: 3px solid var(--accent-mustard);
+      border-bottom: 4px double var(--accent-crimson);
+      margin-bottom: 16px;
+      box-shadow: 3px 3px 0 var(--border-dark);
+    }
+
+    .chapter-header.alt-green {
+      background-color: var(--accent-forest);
+    }
+
+    .chapter-header.alt-crimson {
+      background-color: var(--accent-crimson);
+    }
+
+    .chapter-header h2 {
+      color: var(--paper-bg);
+      font-size: 1.35rem;
+      margin: 0;
+    }
+
+    .page-badge {
+      background-color: var(--accent-mustard);
+      color: var(--ink-main);
+      font-family: "Courier New", "Consolas", monospace;
+      font-weight: bold;
+      padding: 2px 8px;
+      border: 2px inset #fff;
+      font-size: 0.85rem;
+    }
+
+    /* Two-Column Booklet Grid */
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    /* Retro Callout Boxes (PRO-TIP, CONTROLLER HINT, IMPORTANT NOTE) */
+    .retro-callout {
+      background-color: var(--paper-alt);
+      background-image: radial-gradient( rgba(24, 24, 24, 0.08) 1px, transparent 0 );
+      background-size: 6px 6px;
+      border: 3px double var(--border-dark);
+      padding: 12px 16px;
+      margin: 14px 0;
+      box-shadow: 3px 3px 0 var(--border-dark);
+    }
+
+    .retro-callout.pro-tip {
+      border-color: var(--accent-forest);
+    }
+
+    .retro-callout.controller-hint {
+      border-color: var(--accent-navy);
+    }
+
+    .retro-callout.important-note {
+      border-color: var(--accent-crimson);
+    }
+
+    .callout-header {
+      display: inline-block;
+      padding: 2px 8px;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      color: var(--paper-bg);
+      background-color: var(--accent-forest);
+    }
+
+    .retro-callout.controller-hint .callout-header {
+      background-color: var(--accent-navy);
+    }
+
+    .retro-callout.important-note .callout-header {
+      background-color: var(--accent-crimson);
+    }
+
+    /* Section 3: Pure HTML/CSS Card Anatomy Diagram */
+    .anatomy-wrapper {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 24px;
+      background-color: var(--paper-alt);
+      border: 2px solid var(--border-dark);
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #b8b2a2;
+    }
+
+    .css-card-mockup {
+      width: 210px;
+      height: 300px;
+      margin: 0 auto;
+      background-color: #fcfaf2;
+      border: 3px solid var(--border-dark);
+      border-radius: 10px;
+      box-shadow: 5px 5px 0 var(--border-dark);
+      padding: 10px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-inner-frame {
+      border: 2px solid var(--accent-mustard);
+      border-radius: 6px;
+      height: 100%;
+      padding: 8px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-corner-top {
+      font-family: "Courier New", monospace;
+      font-size: 1.35rem;
+      font-weight: bold;
+      color: #7a4b04;
+      line-height: 1.1;
+    }
+
+    .card-art-box {
+      border: 2px inset var(--accent-mustard);
+      background-color: #f7f0d8;
+      height: 118px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .css-bell-icon {
+      width: 48px;
+      height: 44px;
+      background-color: var(--accent-mustard);
+      border: 2px solid #593502;
+      border-radius: 22px 22px 4px 4px;
+      position: relative;
+    }
+
+    .css-bell-icon::after {
+      content: "";
+      position: absolute;
+      bottom: -9px;
+      left: 16px;
+      width: 12px;
+      height: 12px;
+      background-color: #593502;
+      border-radius: 50%;
+    }
+
+    .card-role-banner {
+      background-color: var(--accent-navy);
+      color: var(--paper-bg);
+      text-align: center;
+      font-family: "Impact", sans-serif;
+      font-size: 0.95rem;
+      padding: 3px 6px;
+      border: 1px solid var(--border-dark);
+      letter-spacing: 1px;
+    }
+
+    .card-rules-box {
+      font-size: 0.72rem;
+      background-color: #f0ebe0;
+      border: 1px solid #999;
+      padding: 5px;
+      line-height: 1.25;
+      color: var(--ink-main);
+    }
+
+    .card-stats-bar {
+      display: flex;
+      justify-content: space-between;
+      font-family: "Courier New", monospace;
+      font-size: 0.75rem;
+      border-top: 1px dashed #666;
+      padding-top: 4px;
+    }
+
+    .callout-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background-color: var(--accent-crimson);
+      color: #fff;
+      border: 2px solid #fff;
+      box-shadow: 1px 1px 0 #181818;
+      border-radius: 50%;
+      font-family: "Courier New", monospace;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .badge-pos {
+      position: absolute;
+      z-index: 2;
+    }
+
+    /* Section 4: Playfield / Table Mat Diagram */
+    .playfield-mat {
+      background-color: #1b4d2e;
+      color: #f7f4ea;
+      border: 4px outset var(--win-gray);
+      padding: 16px;
+      box-shadow: 4px 4px 0 var(--border-dark);
+      font-family: "Courier New", monospace;
+    }
+
+    .mat-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .mat-zone {
+      border: 2px dashed #e6c665;
+      background-color: rgba(0, 0, 0, 0.24);
+      padding: 10px 12px;
+      text-align: center;
+      flex: 1;
+    }
+
+    .mat-zone.win95-chrome {
+      background-color: var(--win-gray);
+      color: var(--ink-main);
+      border: 3px outset #fff;
+    }
+
+    /* Tables */
+    table.retro-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px 0;
+      background-color: var(--paper-alt);
+      border: 2px solid var(--border-dark);
+    }
+
+    table.retro-table th {
+      background-color: var(--accent-navy);
+      color: var(--paper-bg);
+      font-family: "Impact", "Arial Black", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 10px;
+      border: 1px solid var(--border-dark);
+      text-align: left;
+    }
+
+    table.retro-table td {
+      padding: 7px 10px;
+      border: 1px solid var(--border-dark);
+      color: var(--ink-muted);
+      font-size: 0.92rem;
+    }
+
+    table.retro-table tr:nth-child(even) td {
+      background-color: var(--paper-bg);
+    }
+
+    /* Ruled Notes Page */
+    .notes-sheet {
+      background-color: var(--paper-bg);
+      border: 2px solid var(--border-dark);
+      padding: 16px 20px;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 27px,
+        #8c9eb5 27px,
+        #8c9eb5 28px
+      );
+      min-height: 224px;
+      line-height: 28px;
+      font-family: "Courier New", monospace;
+    }
+
+    .hotline-box {
+      margin-top: 20px;
+      background-color: var(--accent-navy);
+      color: var(--paper-bg);
+      border: 3px outset var(--accent-mustard);
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* Responsive & Print Rules */
+    @media (max-width: 760px) {
+      .two-col-grid,
+      .anatomy-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .mat-row {
+        flex-direction: column;
+      }
+    }
+
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+      .manual-booklet {
+        box-shadow: none;
+        border: 1px solid #181818;
+        clip-path: none;
+        max-width: 100%;
+        padding: 16px;
+      }
+      .manual-booklet::before,
+      .manual-booklet::after {
+        display: none;
+      }
+      .chapter-section {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="manual-booklet">
+
+    <!-- 1. FRONT MATTER & COVER HEADER -->
+    <header class="cover-banner" id="front-matter">
+      <div class="platform-badge">16-BIT / WIN95 DESKTOP CARTRIDGE INSTRUCTION BOOKLET • VER 1.0</div>
+      <h1 class="cover-title">THE FOX IN THE FOREST</h1>
+      <div class="cover-subtitle">
+        A 2-PLAYER COMPETITIVE FAIRY-TALE TRICK-TAKING CARD GAME • LÖVE2D RETRO EDITION<br>
+        PUBLISHED BY WOODLAND DECREE INTERACTIVE • ENGINE ARCHITECTURE: DETERMINISTIC LUA 5.1 / LUAJIT
+      </div>
+    </header>
+
+    <section class="safety-box" aria-label="Consumer Safety and Cartridge Handling Precautions">
+      <div class="safety-title">
+        <span>&#9888;</span>
+        <strong>IMPORTANT HEALTH, CARTRIDGE &amp; SYSTEM HANDLING PRECAUTIONS</strong>
+      </div>
+      <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem;">
+        <li><strong>HEALTH WARNING:</strong> Take a <strong>10 to 15-minute break every hour</strong> during extended trick-taking sessions, even if you do not feel fatigued.</li>
+        <li><strong>CARTRIDGE / DISKETTE CARE:</strong> Do not touch the gold edge connectors with your fingers, blow moisture onto the contacts, or expose the gamepak to extreme woodland humidity.</li>
+        <li><strong>DETERMINISTIC SEED LOCK:</strong> Every round shuffle is driven by an isolated Combined Linear Congruential PRNG—always save or complete your current trick before powering off your deck.</li>
+      </ul>
+    </section>
+
+    <!-- 2. PROLOGUE / LORE & OBJECTIVE -->
+    <section class="chapter-section" id="prologue-lore">
+      <div class="chapter-header">
+        <h2>Chapter 1: Prologue, Woodland Lore &amp; Objective</h2>
+        <span class="page-badge">PAGE 02</span>
+      </div>
+
+      <div class="two-col-grid">
+        <div>
+          <p>
+            Deep beneath the autumn canopy of the Old Kingdom, the Queen has issued a royal proclamation: whoever outwits the creatures of the deep woods shall be named Grand Royal Advisor. Alongside the hardworking <strong>Woodcutter</strong>, the graceful <strong>Swan</strong>, the cunning <strong>Fox</strong>, the mysterious <strong>Witch</strong>, and the crowned <strong>Monarch</strong>, two rivals clash across thirteen tricks of wits and deception.
+          </p>
+          <p>
+            Yet beware the Queen’s ancient warning: <em>those who grasp too greedily for every prize in the forest shall leave with empty pockets</em>. True mastery lies in balancing ambition with humility.
+          </p>
+        </div>
+
+        <div>
+          <div class="retro-callout important-note">
+            <div class="callout-header">! VICTORY &amp; DEFEAT CONDITIONS !</div>
+            <p style="margin: 4px 0;">
+              <strong>Match Victory Target:</strong> Play proceeds across multiple 13-trick rounds. At the end of each round, players earn points based on the number of tricks won plus bonus points from captured <strong>7 (Treasure)</strong> cards.
+            </p>
+            <p style="margin: 4px 0;">
+              <strong>Winning the Game:</strong> The match ends at the conclusion of any round in which at least one player reaches or exceeds <strong>21 Points</strong> (configurable to 16 or 35 in the <code>Options</code> menu). The player with the highest total score wins!
+            </p>
+            <p style="margin: 4px 0;">
+              <strong>The Greed Trap (Defeat Condition):</strong> Winning <strong>10 to 13 tricks</strong> in a single round brands you <strong>GREEDY</strong>, awarding <strong>0 Trick Points</strong> for that round!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. COMPONENT BREAKDOWN & CARD ANATOMY -->
+    <section class="chapter-section" id="card-anatomy">
+      <div class="chapter-header alt-green">
+        <h2>Chapter 2: Component Breakdown &amp; Card Anatomy</h2>
+        <span class="page-badge">PAGE 04</span>
+      </div>
+
+      <p>
+        Unlike a standard 52-card Anglo-American deck, <strong>The Fox in the Forest</strong> uses a specialized <strong>33-card deck</strong> divided into <strong>3 Suits</strong> (<strong>Bells</strong>, <strong>Keys</strong>, and <strong>Moons</strong>), each ranked strictly from <strong>1 through 11</strong>. Every <strong>even-ranked card</strong> (<code>2, 4, 6, 8, 10</code>) is a normal trick-taking unit, while every <strong>odd-ranked card</strong> (<code>1, 3, 5, 7, 9, 11</code>) possesses a fairy-tale character ability.
+      </p>
+
+      <div class="anatomy-wrapper">
+        <!-- Pure CSS Card Anatomy Mockup -->
+        <div class="css-card-mockup" aria-label="Card Anatomy Diagram">
+          <span class="callout-num badge-pos" style="top: -8px; left: -8px;">1</span>
+          <span class="callout-num badge-pos" style="top: 38px; left: -8px;">2</span>
+          <span class="callout-num badge-pos" style="top: 96px; right: -10px;">3</span>
+          <span class="callout-num badge-pos" style="top: 170px; left: -8px;">4</span>
+          <span class="callout-num badge-pos" style="bottom: 58px; right: -10px;">5</span>
+          <span class="callout-num badge-pos" style="bottom: 8px; left: -8px;">6</span>
+
+          <div class="card-inner-frame">
+            <div class="card-corner-top">
+              11<br>
+              <span style="font-size: 0.78rem;">BELLS</span>
+            </div>
+
+            <div class="card-art-box">
+              <div class="css-bell-icon"></div>
+              <div style="margin-top: 14px; font-family: 'Courier New', monospace; font-size: 0.7rem; color: #593502;">
+                [CROWN EMBLEM]
+              </div>
+            </div>
+
+            <div class="card-role-banner">MONARCH (LEAD FORCE)</div>
+
+            <div class="card-rules-box">
+              <strong>ON LEAD:</strong> Opponent must follow with the <strong>1 (Swan)</strong> or their <strong>highest</strong> card of this suit.
+            </div>
+
+            <div class="card-stats-bar">
+              <span>COST: 0 (FOLLOW SUIT)</span>
+              <span>PWR: 11 / DEF: TRICK</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Callout Legend -->
+        <div>
+          <h3>Card Anatomy Pointer Legend</h3>
+          <ol style="padding-left: 20px; margin-top: 6px;">
+            <li><strong>Rank / Combat Power (<span class="hud-num">1–11</span>):</strong> Determines trick-winning strength within the active suit. Higher rank beats lower rank of the same suit.</li>
+            <li><strong>Suit Pip (<span class="hud-num">Bells / Keys / Moons</span>):</strong> Indicates the card's faction suit. Followers must match the led suit if able (Zero mana/resource cost; suit-following is the primary play constraint).</li>
+            <li><strong>Procedural Suit &amp; Character Art Box:</strong> Displays the gold Bell, silver Key, or violet Crescent Moon alongside the character's procedural emblem.</li>
+            <li><strong>Card Type / Character Role Banner:</strong> Appears on all odd-numbered cards (<code>1 Swan</code>, <code>3 Fox</code>, <code>5 Woodcutter</code>, <code>7 Treasure</code>, <code>9 Witch</code>, <code>11 Monarch</code>).</li>
+            <li><strong>Ability Rules Text:</strong> Summarizes whether the effect triggers immediately upon play (<code>Fox</code>, <code>Woodcutter</code>), during lead validation (<code>Monarch</code>), during trump comparison (<code>Witch</code>), or upon trick resolution (<code>Swan</code>, <code>Treasure</code>).</li>
+            <li><strong>Rarity &amp; Deck Slot Metadata:</strong> Every card in the 33-card deck is a 1-of-1 unique rank-suit combination.</li>
+          </ol>
+        </div>
+      </div>
+
+      <table class="retro-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Card Category / Role</th>
+            <th>Copies in Deck</th>
+            <th>Trigger Window</th>
+            <th>Special Rule / Gameplay Effect</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="hud-num">1</td>
+            <td><strong>Swan</strong> (Character)</td>
+            <td class="hud-num">3 (1 per suit)</td>
+            <td>Trick Resolution</td>
+            <td>If you play a <code>1</code> and <strong>lose</strong> the trick, you lead the next trick instead of the trick winner.</td>
+          </tr>
+          <tr>
+            <td class="hud-num">2, 4, 6, 8, 10</td>
+            <td><strong>Standard Woodland Cards</strong></td>
+            <td class="hud-num">15 (5 per suit)</td>
+            <td>Passive</td>
+            <td>No special ability; used to control tempo, follow suit cleanly, or duck unwanted tricks.</td>
+          </tr>
+          <tr>
+            <td class="hud-num">3</td>
+            <td><strong>Fox</strong> (Character)</td>
+            <td class="hud-num">3 (1 per suit)</td>
+            <td>Immediate On-Play</td>
+            <td>When played, you may exchange 1 card from your hand with the face-up <strong>Decree</strong> card (changing the active trump suit), or pass.</td>
+          </tr>
+          <tr>
+            <td class="hud-num">5</td>
+            <td><strong>Woodcutter</strong> (Character)</td>
+            <td class="hud-num">3 (1 per suit)</td>
+            <td>Immediate On-Play</td>
+            <td>When played, draw the top card of the face-down Stock pile into your hand, then bury any 1 card from your hand face-down at the bottom of the Stock.</td>
+          </tr>
+          <tr>
+            <td class="hud-num">7</td>
+            <td><strong>Treasure</strong> (Relic/Bonus)</td>
+            <td class="hud-num">3 (1 per suit)</td>
+            <td>Trick Scoring</td>
+            <td>The winner of a trick containing a <code>7</code> immediately scores <strong>+1 Bonus Point</strong> for each <code>7</code> in that trick.</td>
+          </tr>
+          <tr>
+            <td class="hud-num">9</td>
+            <td><strong>Witch</strong> (Character)</td>
+            <td class="hud-num">3 (1 per suit)</td>
+            <td>Trick Comparison</td>
+            <td>When determining the trick winner, if <strong>only one 9</strong> is in the trick, treat that <code>9</code> as belonging to the active <strong>Trump (Decree) suit</strong>.</td>
+          </tr>
+          <tr>
+            <td class="hud-num">11</td>
+            <td><strong>Monarch</strong> (Royal Unit)</td>
+            <td class="hud-num">3 (1 per suit)</td>
+            <td>On Lead</td>
+            <td>When led, if the opponent holds any cards of the led suit, they <strong>must</strong> play either the <code>1 (Swan)</code> of that suit or their <strong>highest-ranked card</strong> of that suit.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 4. PLAYFIELD / TABLE MAT DIAGRAM -->
+    <section class="chapter-section" id="playfield-diagram">
+      <div class="chapter-header alt-crimson">
+        <h2>Chapter 3: Playfield &amp; Table Mat Layout</h2>
+        <span class="page-badge">PAGE 06</span>
+      </div>
+
+      <p>
+        The Windows 95 tabletop interface organizes all active zones onto a single classic <code>#008000</code> felt screen with raised 3D beveled controls and sunken card wells:
+      </p>
+
+      <div class="playfield-mat" aria-label="Playfield Table Mat Diagram">
+        <div class="mat-row">
+          <div class="mat-zone win95-chrome" style="flex: 3;">
+            <strong>TOP WIN95 MENU BAR:</strong> [Game] &bull; [Options] &bull; [Help]
+          </div>
+        </div>
+
+        <div class="mat-row">
+          <div class="mat-zone" style="flex: 3;">
+            <strong>ZONE A: OPPONENT / AI HAND (TOP)</strong><br>
+            13 Face-Down Crosshatch Cards (Dealt at Round Start)
+          </div>
+          <div class="mat-zone win95-chrome" style="flex: 1.3;">
+            <strong>ZONE E: RECESSED SCOREBOARD</strong><br>
+            Match Score (0–21+)<br>
+            Tricks Won &amp; Tier Preview<br>
+            Captured 7s Bonus Counter
+          </div>
+        </div>
+
+        <div class="mat-row">
+          <div class="mat-zone">
+            <strong>ZONE B: STOCK DRAW PILE</strong><br>
+            6 Face-Down Cards<br>
+            (Used by <code>5 Woodcutter</code>)
+          </div>
+          <div class="mat-zone">
+            <strong>ZONE C: DECREE CARD WELL</strong><br>
+            1 Face-Up Card<br>
+            <strong>Defines Active Trump Suit</strong><br>
+            (Swappable via <code>3 Fox</code>)
+          </div>
+          <div class="mat-zone" style="flex: 1.8;">
+            <strong>ZONE D: CENTRAL TRICK PLAY WELL</strong><br>
+            [ LEAD SLOT ] &nbsp;&bull;&nbsp; [ FOLLOW SLOT ]<br>
+            Drag-and-Drop Target Zone
+          </div>
+        </div>
+
+        <div class="mat-row" style="margin-bottom: 0;">
+          <div class="mat-zone win95-chrome" style="flex: 0.7;">
+            <strong>SORT CONTROLS</strong><br>
+            [Sort: Suit]<br>
+            [Sort: Value]
+          </div>
+          <div class="mat-zone" style="flex: 2.3;">
+            <strong>ZONE F: ACTIVE PLAYER HAND (BOTTOM)</strong><br>
+            Fanned Face-Up Cards &bull; Hover Glow &bull; Illegal Play Dimming
+          </div>
+          <div class="mat-zone win95-chrome" style="flex: 0.7;">
+            <strong>UTILITY BAR</strong><br>
+            [Undo]<br>
+            [Rules / Help]
+          </div>
+        </div>
+      </div>
+
+      <div class="retro-callout controller-hint">
+        <div class="callout-header">&#9000; MOUSE &amp; KEYBOARD CONTROLLER HINTS</div>
+        <p style="margin: 4px 0;">
+          <strong>Mouse Controls:</strong> Click and drag any legal (bright) card from your hand into the central <strong>Trick Play Well</strong>, or simply click a legal card to play it immediately. Attempting to drag an illegal (dimmed) card triggers a smooth spring bounce-back to your hand.
+        </p>
+        <p style="margin: 4px 0;">
+          <strong>Keyboard Shortcuts:</strong> Press <code>S</code> to Sort Hand by Suit, <code>V</code> to Sort Hand by Value, <code>Z</code> to Undo the last turn, <code>F1</code> to open the in-game Rules Reference, and <code>SPACE</code> / <code>ENTER</code> to advance trick resolution or reveal hands in 1v1 Hotseat mode.
+        </p>
+      </div>
+    </section>
+
+    <!-- 5. STEP-BY-STEP TURN SEQUENCE -->
+    <section class="chapter-section" id="turn-sequence">
+      <div class="chapter-header">
+        <h2>Chapter 4: Step-by-Step Turn Sequence &amp; Priority Rules</h2>
+        <span class="page-badge">PAGE 08</span>
+      </div>
+
+      <ol style="padding-left: 22px;">
+        <li>
+          <strong>Phase 1 — Round Setup &amp; Decree Determination:</strong>
+          Shuffle all 33 cards using the deterministic PRNG. Deal <strong>13 cards</strong> to Player 1 and <strong>13 cards</strong> to Player 2. Place the remaining <strong>7 cards</strong> face-down as the Stock pile, then flip the top card of the Stock pile face-up onto the <strong>Decree Slot</strong> (leaving 6 face-down cards in the Stock). The suit of the Decree card establishes the active <strong>Trump Suit</strong>. The non-dealer leads Trick #1.
+        </li>
+        <li>
+          <strong>Phase 2 — Lead Step (<code>WAIT_LEAD</code>):</strong>
+          The active lead player plays any 1 card from their hand face-up into the <strong>Lead Slot</strong>. That card's printed suit becomes the <strong>Led Suit</strong> for the trick.
+        </li>
+        <li>
+          <strong>Phase 3 — Lead Ability Resolution (Priority Window A):</strong>
+          If the led card is a <strong>3 (Fox)</strong> or <strong>5 (Woodcutter)</strong>, its on-play ability resolves <em>immediately</em> before the opponent selects a follow card:
+          <ul>
+            <li><em>Important Timing Rule:</em> If the lead player plays a <strong>3 (Fox)</strong> and swaps the Decree card to a new suit, the newly swapped Decree suit becomes trump for the current trick immediately!</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Phase 4 — Follow Step (<code>WAIT_FOLLOW</code>):</strong>
+          The following player must play 1 legal card from their hand into the <strong>Follow Slot</strong>:
+          <ul>
+            <li><strong>Standard Follow Rule:</strong> If the follower holds at least one card matching the <strong>Led Suit</strong>, they must play a card of the Led Suit.</li>
+            <li><strong>Monarch (11) Override:</strong> If the lead card is an <strong>11 (Monarch)</strong> and the follower holds cards of the Led Suit, the follower is restricted to playing either the <strong>1 (Swan)</strong> of that suit or their <strong>highest-ranked card</strong> of that suit.</li>
+            <li><strong>Void in Suit:</strong> If the follower holds zero cards of the Led Suit, they may play any card from their hand (including a Trump card or off-suit dump).</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Phase 5 — Follow Ability Resolution (Priority Window B):</strong>
+          If the follow card is a <strong>3 (Fox)</strong> or <strong>5 (Woodcutter)</strong>, the follower resolves the swap or draw-and-bury modal before trick comparison occurs.
+        </li>
+        <li>
+          <strong>Phase 6 — Trick Comparison &amp; Winner Resolution (<code>TRICK_RESOLVE</code>):</strong>
+          <ul>
+            <li><strong>Witch (9) Check:</strong> If <em>exactly one</em> <code>9</code> was played in the trick, treat that <code>9</code>'s suit as the current Decree (Trump) suit. If <em>both</em> players played a <code>9</code>, their magic cancels out and both retain their printed suits.</li>
+            <li><strong>Determine Winner:</strong> The highest card of the active Trump suit wins the trick. If neither card is Trump (or effective Trump), the highest card of the Led Suit wins the trick.</li>
+            <li><strong>Award Treasure (7):</strong> The winner of the trick immediately receives <strong>+1 Bonus Point</strong> for each <code>7</code> present in the trick (up to +2 points if two 7s were played).</li>
+            <li><strong>Determine Next Leader &amp; Swan (1) Check:</strong> Normally, the winner of the trick leads the next trick. However, if the losing player played a <strong>1 (Swan)</strong>, the losing player steals the lead for the next trick!</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Phase 7 — End-of-Round Scoring (<code>ROUND_OVER</code>):</strong>
+          Once all 13 tricks have been played, compare each player's total tricks won against the Scoring Brackets, add their accumulated <code>7 (Treasure)</code> bonus points, and check if either player has reached <strong>21 points</strong>.
+        </li>
+      </ol>
+    </section>
+
+    <!-- 6. CORE MECHANICS & KEYWORD GLOSSARY -->
+    <section class="chapter-section" id="keyword-glossary">
+      <div class="chapter-header alt-green">
+        <h2>Chapter 5: Core Mechanics, Scoring Tiers &amp; Keyword Glossary</h2>
+        <span class="page-badge">PAGE 10</span>
+      </div>
+
+      <div class="two-col-grid">
+        <div>
+          <h3>Official Keyword Glossary</h3>
+          <dl style="margin: 0;">
+            <dt><strong>1. DECREE (Active Trump Suit)</strong></dt>
+            <dd style="margin: 0 0 8px 12px;">The face-up card beside the Stock pile. Any card matching the Decree's suit outranks all cards of non-Decree suits.</dd>
+
+            <dt><strong>2. SWAN [Rank 1] (Lead Takeover)</strong></dt>
+            <dd style="margin: 0 0 8px 12px;">The lowest rank in every suit, yet tactically vital: losing a trick with a <code>1</code> grants you the lead on the next trick.</dd>
+
+            <dt><strong>3. FOX [Rank 3] (Decree Manipulation)</strong></dt>
+            <dd style="margin: 0 0 8px 12px;">Allows mid-round trump switching by swapping a card from your hand with the face-up Decree card.</dd>
+
+            <dt><strong>4. WOODCUTTER [Rank 5] (Hand Filtering / Bury)</strong></dt>
+            <dd style="margin: 0 0 8px 12px;">Draws the top card of the Stock pile and forces you to bury 1 card from your hand to the bottom of the Stock.</dd>
+
+            <dt><strong>5. TREASURE [Rank 7] (Point Bounty)</strong></dt>
+            <dd style="margin: 0 0 8px 12px;">Grants +1 permanent point to whichever player wins the trick containing it, independent of trick-tier brackets.</dd>
+
+            <dt><strong>6. WITCH [Rank 9] (Shapeshifting Trump)</strong></dt>
+            <dd style="margin: 0 0 8px 12px;">Counts as part of the Trump suit during trick resolution so long as only one <code>9</code> is in the trick.</dd>
+
+            <dt><strong>7. MONARCH [Rank 11] (Royal Compulsion)</strong></dt>
+            <dd style="margin: 0 0 8px 12px;">When led, forces a suit-following opponent to surrender either their <code>1 (Swan)</code> or their highest card in that suit.</dd>
+
+            <dt><strong>8. HUMBLE vs. GREEDY (Scoring Polarity)</strong></dt>
+            <dd style="margin: 0 0 8px 12px;">Winning <code>0–3</code> tricks (Humble) awards the same maximum <code>6 points</code> as winning <code>7–9</code> tricks (Victorious), while winning <code>10–13</code> tricks (Greedy) collapses your trick score to <code>0 points</code>.</dd>
+          </dl>
+        </div>
+
+        <div>
+          <h3>End-of-Round Trick Scoring Table</h3>
+          <table class="retro-table">
+            <thead>
+              <tr>
+                <th>Tricks Won</th>
+                <th>Rank Title</th>
+                <th>Points Awarded</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="hud-num">0 – 3 Tricks</td>
+                <td><strong>Humble</strong></td>
+                <td class="hud-num">6 Points</td>
+              </tr>
+              <tr>
+                <td class="hud-num">4 Tricks</td>
+                <td><strong>Modest</strong></td>
+                <td class="hud-num">1 Point</td>
+              </tr>
+              <tr>
+                <td class="hud-num">5 Tricks</td>
+                <td><strong>Clever</strong></td>
+                <td class="hud-num">2 Points</td>
+              </tr>
+              <tr>
+                <td class="hud-num">6 Tricks</td>
+                <td><strong>Sly</strong></td>
+                <td class="hud-num">3 Points</td>
+              </tr>
+              <tr>
+                <td class="hud-num">7 – 9 Tricks</td>
+                <td><strong>Victorious</strong></td>
+                <td class="hud-num">6 Points</td>
+              </tr>
+              <tr>
+                <td class="hud-num">10 – 13 Tricks</td>
+                <td><strong>Greedy</strong></td>
+                <td class="hud-num" style="color: var(--accent-crimson);">0 Points!</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="retro-callout pro-tip">
+            <div class="callout-header">&#9733; PRO-TIP: DECK &amp; HAND MANAGEMENT</div>
+            <p style="margin: 4px 0;">
+              <strong>Deck Constraints:</strong> Because there are 33 cards and only 26 are dealt initially (13 per player), <strong>6 cards remain unseen</strong> in the face-down Stock pile (unless cycled via <code>5 Woodcutter</code>). There is no pre-round mulligan; instead, use the <code>3 Fox</code> and <code>5 Woodcutter</code> abilities to sculpt weak hands toward a 6-point <strong>Humble (0–3 tricks)</strong> finish!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SAMPLE ROUND WALKTHROUGH -->
+    <section class="chapter-section" id="sample-walkthrough">
+      <div class="chapter-header alt-crimson">
+        <h2>Chapter 6: Concrete Turn-by-Turn Sample Round Walkthrough</h2>
+        <span class="page-badge">PAGE 12</span>
+      </div>
+
+      <p>
+        Follow this annotated sequence from a live match between <strong>Player A</strong> and <strong>Player B</strong>. At the start of the sequence, the face-up <strong>Decree Card</strong> is the <strong>4 of Keys</strong> (making <strong>Keys</strong> the active Trump suit).
+      </p>
+
+      <table class="retro-table">
+        <thead>
+          <tr>
+            <th>Trick #</th>
+            <th>Lead Action</th>
+            <th>Follow Action</th>
+            <th>Ability &amp; Resolution Breakdown</th>
+            <th>Board &amp; Score Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="hud-num">Trick 1</td>
+            <td><strong>Player A</strong> leads <code>11 of Bells (Monarch)</code>.</td>
+            <td><strong>Player B</strong> holds <code>1, 6, 8 of Bells</code>. Forced by Monarch, Player B plays <code>1 of Bells (Swan)</code>.</td>
+            <td>Neither card is Trump (Keys). <code>11 of Bells</code> beats <code>1 of Bells</code>. Player A wins Trick #1, <strong>but</strong> Player B lost with a <code>1 (Swan)</code> and steals the next lead!</td>
+            <td>Tricks: A=1, B=0.<br><strong>Next Lead: Player B</strong>.</td>
+          </tr>
+          <tr>
+            <td class="hud-num">Trick 2</td>
+            <td><strong>Player B</strong> leads <code>3 of Moons (Fox)</code> and swaps <code>2 of Bells</code> from hand with the Decree (<code>4 of Keys</code>).</td>
+            <td><strong>Player A</strong> holds <code>7 of Moons (Treasure)</code> and plays it to follow Moons.</td>
+            <td>Player B's Fox swap changed the Decree to <strong>Bells</strong>! Neither Moons card is Trump. Player A's <code>7 of Moons</code> beats <code>3 of Moons</code> and captures a <code>7 (Treasure)</code>!</td>
+            <td>Decree: <strong>Bells</strong>.<br>Tricks: A=2 (+1 Bonus pt), B=0.<br><strong>Next Lead: Player A</strong>.</td>
+          </tr>
+          <tr>
+            <td class="hud-num">Trick 3</td>
+            <td><strong>Player A</strong> leads <code>7 of Keys (Treasure)</code>.</td>
+            <td><strong>Player B</strong> is void in Keys and plays <code>9 of Moons (Witch)</code>.</td>
+            <td>Only one <code>9</code> is in the trick, so Player B's <code>9 of Moons (Witch)</code> counts as the Trump suit (<strong>Bells</strong>) and trumps Player A's <code>7 of Keys</code>! Player B wins the trick and steals the +1 Treasure bonus!</td>
+            <td>Tricks: A=2 (+1 pt), B=1 (+1 pt).<br><strong>Next Lead: Player B</strong>.</td>
+          </tr>
+          <tr>
+            <td class="hud-num">Round End<br>(After 13)</td>
+            <td colspan="2">Final Round Trick Tally:<br><strong>Player A:</strong> 3 Tricks Won (+1 Treasure)<br><strong>Player B:</strong> 10 Tricks Won (+2 Treasures)</td>
+            <td>Player A stayed at <strong>3 Tricks (Humble = 6 pts)</strong> + 1 Treasure = <strong>7 pts</strong>.<br>Player B overextended to <strong>10 Tricks (Greedy = 0 pts!)</strong> + 2 Treasures = <strong>2 pts</strong>.</td>
+            <td><strong>Round Score:</strong><br>Player A: <strong>+7 Points</strong><br>Player B: <strong>+2 Points</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 8. BACK MATTER / NOTES SECTION -->
+    <section class="chapter-section" id="back-matter" style="margin-bottom: 0;">
+      <div class="chapter-header">
+        <h2>Chapter 7: Player Strategy Notes, Warranty &amp; Support Hotline</h2>
+        <span class="page-badge">PAGE 14</span>
+      </div>
+
+      <div class="notes-sheet" aria-label="Player Notes Section">
+        <div><strong>PLAYER NOTES &amp; SEED LOG (RECORD FAVORITE PRNG SEEDS &amp; RIVAL SCORES):</strong></div>
+        <div>&bull; Seed #202610 — P1 Humble Strategy vs AI: ____________________________________</div>
+        <div>&bull; _____________________________________________________________________________</div>
+        <div>&bull; _____________________________________________________________________________</div>
+        <div>&bull; _____________________________________________________________________________</div>
+        <div>&bull; _____________________________________________________________________________</div>
+      </div>
+
+      <div class="hotline-box">
+        <div>
+          <strong>WOODLAND DECREE AUTOMATED HINT &amp; COUNSELOR HOTLINE:</strong><br>
+          <span class="mono">1-900-555-FOX9</span> ($0.95/min first minute, $0.50 each additional minute. Ask parents before calling!)
+        </div>
+        <div class="page-badge" style="font-size: 0.95rem;">PRINTED IN ARCH LINUX • REV-A</div>
+      </div>
+
+      <p style="font-size: 0.76rem; color: var(--ink-muted); margin-top: 14px; margin-bottom: 0; text-align: center;">
+        &copy; 1995–2026 Woodland Decree Interactive. Limited 90-Day Cartridge &amp; Software Warranty: The publisher warrants to the original consumer purchaser that this LÖVE2D / Lua 5.1 / LuaJIT software medium shall be free from defects in materials and deterministic workmanship for a period of ninety (90) days from the date of purchase. All rights reserved.
+      </p>
+    </section>
+
+  </main>
+</body>
+</html>
